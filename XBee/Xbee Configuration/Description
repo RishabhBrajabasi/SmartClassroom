@@ -1,0 +1,6 @@
+Coordinator 
+EndNode1 
+EndNode2
+
+V1: Attempt at single point to point
+V2: End nodes have same adddress. Coordinator talks to both.
