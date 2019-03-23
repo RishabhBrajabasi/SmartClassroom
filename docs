@@ -1,3 +1,10 @@
 Google Speech Transcription (References)
 https://cloud.google.com/speech-to-text/docs/reference/libraries#client-libraries-install-python
 https://github.com/GoogleCloudPlatform/python-docs-samples/tree/master/speech/cloud-client
+
+The google speech python client works only for raw format files
+Sox can be used to convert a wav file to raw format, No issues with this so far. The following is the command
+
+sox audio.wav -c 1 -r 16000 -b 16 audio.raw
+
+Synch is for short audio files and asynch has to be used to transcribe long audio files
