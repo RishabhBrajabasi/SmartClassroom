@@ -8,3 +8,7 @@ Sox can be used to convert a wav file to raw format, No issues with this so far.
 sox audio.wav -c 1 -r 16000 -b 16 audio.raw
 
 Synch is for short audio files and asynch has to be used to transcribe long audio files
+
+To convert mp3 to raw we must first convert it into wav using the command
+
+ffmpeg -i audio.mp3 "audio.wav"
