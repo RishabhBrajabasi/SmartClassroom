@@ -14,4 +14,4 @@ To convert mp3 to raw we must first convert it into wav using the command
 ffmpeg -i audio.mp3 "audio.wav"
 
 To record audio from webcam directly into raw file:
-sudo arecord --format=S16_LE --duration=5 --rate=16000--file-type=raw out.raw
+sudo arecord --format=S16_LE --duration=5 --rate=16000 out.raw
