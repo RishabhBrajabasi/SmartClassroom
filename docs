@@ -18,6 +18,19 @@ sudo arecord --format=S16_LE --duration=5 --rate=16000 out.raw
 
 Real-time streaming works but there are a few issues using that - Same phrase gets repeated many times.
 
-
+Export Command: export GOOGLE_APPLICATION_CREDENTIALS="/home/pi/wsn.json"
 
 Webpage and RPi access - RPi is connected to the CMU network and registered as smartclass.wv.cc.cmu.edu 
+
+
+
+Jasper:
+Due to ambiguous nature of the commands. See ~/Desktop/jasper/client/modules/Life.py and lights.py
+To turn on the Lights: Lights
+To turn off the Lights: OFF
+
+Transcribing:
+wsn.py - short audio
+wsn2.py - long audio
+test_python.py - record and transcribe
+wsn3.py - realtime transcribe
