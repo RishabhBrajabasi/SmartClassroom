@@ -2,6 +2,7 @@
 <meta charset="utf-8">
 
 <head>
+  <title>Attendance Record</title>
 	<style>
 
 	.axis {
@@ -80,7 +81,7 @@ d3.csv("bar-data.csv", function(error, data) {
       .attr("y", 6)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
-      .text("Value ($)");
+      .text("Attendance");
 
   svg.selectAll("bar")
       .data(data)
