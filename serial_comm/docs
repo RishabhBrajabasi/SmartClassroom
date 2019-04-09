@@ -1,0 +1,13 @@
+Check ls /dev/tty* to note the tty port of the arduino. It is subject to change on every unplug.
+Replace teh tty port in the python files on the pi side
+
+rpi_read and serail_2_pi.ino will let the arduino send a string of data continously to the pi and the pi prints on the STD output.
+
+rpi_read_2 and pi_2_serial.ino will let both arduino and pi communicate with eachother and all the transactions will printed on the STD output.
+
+This is from a tutorial but had synch issues. The data was sent but they were not printed on the STDO. The problem in on the arduino side code.
+There is only one serial port for tx and rx. So bytes that were sent out from arduino were picked up the Serial.available as if they were the incomming bytes.
+
+After making some changes it works well. But still care has to be taken to avoid that from happening.
+
+Input buffer should be flushed on every loop. flush() will wait for outgoing transmissions but not the incomming ones.
