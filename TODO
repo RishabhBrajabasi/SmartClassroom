@@ -1,10 +1,14 @@
 TODO:
 
 1. Connect Arduino and RPi using the USB
-	Test if they can communicate a Byte
-	Send and receive commands accordingly
+	Test if they can communicate a Byte -- Done
+	Send and receive commands accordingly -- Done
 Link: https://www.instructables.com/id/Raspberry-Pi-Arduino-Serial-Communication/
 	
 2. Populate CSV fillet using Python on the Pi
 	Enable Auto-refresh in the temperature.html
-	Modify the Attendance Record to show Name Entry and Exit Time
+	Modify the Attendance Record to show Name Entry and Exit Time -- Done
+	
+3. Setup serial protocol between arduino and pi to show a chart of the quiz record
+
+4. Do the same temperature thing for temperature
