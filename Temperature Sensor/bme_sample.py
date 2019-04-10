@@ -2,7 +2,7 @@
 
 import smbus
 import time
-
+import csv
 bus_number = 1
 i2c_address = 0x76
 
@@ -11,8 +11,8 @@ bus = smbus.SMBus(bus_number)
 digT = []
 digP = []
 digH = []
-
 t_fine = 0.0
+csv_path = '/var/www/html/data/temp.csv'
 
 def writeReg(reg_address, data):
     bus.write_byte_data(i2c_address,reg_address,data)
@@ -57,6 +57,7 @@ def get_calib_param():
             
 def readData():
     data = []
+    csv_list = []
     for i in range (0xF7, 0xF7+8):
         data.append(bus.read_byte_data(i2c_address,i))
     pres_raw = (data[0] << 12) | (data[1] << 4) | (data[2] >> 4)
@@ -65,6 +66,14 @@ def readData():
     t = compensate_T(temp_raw)
     p = compensate_P(pres_raw)
     h = compensate_H(hum_raw)
+    csv_list.append(str(t))
+    csv_list.append(str(h))
+    csv_list.append(str(p))
+    # print csv_list
+    with open(csv_path, 'a') as csvFile:
+		Writer = csv.writer(csvFile)
+		Writer.writerow(csv_list)
+	csvFile.close()
     return p + "," + t + "," + h
 
 def compensate_P(adc_P):
