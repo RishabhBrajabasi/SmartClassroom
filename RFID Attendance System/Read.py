@@ -79,14 +79,14 @@ try:
 				print "Name: " + name
 				if c2 == 0:
 					list_2.append('Smruthi Ramesh')
-					print "Date: " + (date.today())
+					print "Date: " + str(date.today())
 					print "Entry time: " + (datetime.datetime.now().strftime("%I:%M:%S %p"))
 					list_2.append(str(date.today()))
 					list_2.append((datetime.datetime.now().strftime("%I:%M:%S %p")))
 
 					c2 += 1
 				elif c2 == 1:
-					print "Date: " + (date.today())
+					print "Date: " + str(date.today())
 					print "Exit time: " + (datetime.datetime.now().strftime("%I:%M:%S %p"))
 					list_2.append((datetime.datetime.now().strftime("%I:%M:%S %p")))
 					with open(csv_path, 'a') as csvFile:
@@ -108,14 +108,14 @@ try:
 				print "Name: " + name
 				if c3 == 0:
 					list_3.append('Rishabh Brajabasi')
-					print "Date: " + (date.today())
+					print "Date: " + str(date.today())
 					print "Entry time: " + (datetime.datetime.now().strftime("%I:%M:%S %p"))
 					list_3.append(str(date.today()))
 					list_3.append((datetime.datetime.now().strftime("%I:%M:%S %p")))
 
 					c3 += 1
 				elif c3 == 1:
-					print "Date: " + (date.today())
+					print "Date: " + str(date.today())
 					print "Exit time: " + (datetime.datetime.now().strftime("%I:%M:%S %p"))
 					list_3.append((datetime.datetime.now().strftime("%I:%M:%S %p")))
 					with open(csv_path, 'a') as csvFile:
