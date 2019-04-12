@@ -1,6 +1,12 @@
 import ctypes
 c_uint8 = ctypes.c_uint8
 
+class bits(ctypes.LittleEndianStructure):
+    _fields_ = [
+                ("occupancy", c_uint8, 1),
+                
+
+    ]
 class Flags_bits( ctypes.LittleEndianStructure ):
     _fields_ = [
                 ("answers",     c_uint8, 4 ),  # asByte & 1
@@ -10,14 +16,16 @@ class Flags_bits( ctypes.LittleEndianStructure ):
                ]
 
 class Flags( ctypes.Union ):
-    _anonymous_ = ("bit",)
+    _anonymous_ = ("bit", "quiz")
     _fields_ = [
-                ("bit",    Flags_bits ),
-                ("asByte", c_uint8    )
+                ("bit",    bits ),
+                ("asByte", c_uint8),
+                ("quiz", Flags_bits)
+
                ]
 
 flags = Flags()
-flags.asByte = 0x97  # ->0010
+flags.asByte = 0x45  # ->0010
 ans = '{0:04b}'.format(flags.answers)
 ans_arr = [int(i) for i in ans]
 if ans_arr[0] == 1:
@@ -33,4 +41,4 @@ if ans_arr[3] == 1:
 print( "type: %i"      % flags.type     )
 print( "deviceID:  %i" % flags.deviceID )
 print( "answers   :  %i" % flags.answers    )
-# print( "idle  : %i"      % flags.idle       )
+print( "occupancy  : %i"      % flags.occupancy      )
