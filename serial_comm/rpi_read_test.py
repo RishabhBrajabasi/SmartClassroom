@@ -74,7 +74,7 @@ while True:
 				print "Not occupied"
 			
 
-		f = open(path_file, "w")
+			f = open(path_file, "w")
 
-		f.write(str(d_1) + '\n' + str(d_2) + '\n' + str(d_3) + '\n')
-		f.close()
+			f.write(str(d_1) + '\n' + str(d_2) + '\n' + str(d_3) + '\n')
+			f.close()

@@ -1,7 +1,7 @@
 #!/user/bin/env python
 import serial
 port = "/dev/ttyACM0"
-crct_ans = 79
+crct_ans = 0x4c
 import ctypes
 c_uint8 = ctypes.c_uint8
 d_1 = 0
@@ -29,7 +29,7 @@ s1 = serial.Serial(port, 9600)
 s1.flushInput()
 while True:
 	if s1.inWaiting()>0:
-		inputValue = s1.read(2) # need to change this to 3 or figure out a way to solve this
+		inputValue = s1.readline() # need to change this to 3 or figure out a way to solve this
 		print "RAW: " + inputValue
 		flags.asByte = c_uint8(int(inputValue))
 		if(flags.type == 1):
@@ -51,7 +51,7 @@ while True:
 			s1.write('%d'%crct_ans)
 		else:
 			print( "deviceID:  %i" % flags.deviceID )
-			print( "answers   :  %i" % flags.answers)
+			print( "occupancy   :  %i" % flags.answers)
 			if flags.answers == 1:
 				if flags.deviceID == 1:
 					d_1 = 1
@@ -66,7 +66,7 @@ while True:
 				print "Not occupied"
 			
 
-		f = open(path_file, "w")
+			f = open(path_file, "w")
 
-		f.write(str(d_1) + '\n' + str(d_2) + '\n' + str(d_3) + '\n')
-		f.close()
+			f.write(str(d_1) + '\n' + str(d_2) + '\n') #removed
+			f.close()
