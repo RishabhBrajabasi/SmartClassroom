@@ -1,7 +1,7 @@
 #!/user/bin/env python
 import serial
-port = "/dev/ttyACM1"
-crct_ans = 0x4c
+port = "/dev/ttyACM0"
+crct_ans = 0x4E
 import ctypes
 c_uint8 = ctypes.c_uint8
 d_1 = 0
@@ -50,6 +50,7 @@ while True:
 			print( "deviceID:  %i" % flags.deviceID )
 			print( "answers   :  %i" % flags.answers    )
 			s1.write('%d'%crct_ans)
+			s1.write('\0')
 		else:
 			print( "deviceID:  %i" % flags.deviceID )
 			print( "occupancy   :  %i" % flags.answers)
