@@ -1,4 +1,4 @@
-#!/user/bin/env python
+l#!/user/bin/env python
 path_file = '/Users/sakthi/Sites/file.txt'
 
 flag = 1;
