@@ -10,7 +10,7 @@ int main(int argc, char const *argv[])
 	while(1){
 		int ans = 0, temp = 0;
 		char write_f[3];
-		fp = fopen("sakthi.txt", "a+");
+		fp = fopen("answers.csv", "a+");
 		printf("Question %d:\n", index);
 		printf("A: ");
 		scanf("%d", &temp);
