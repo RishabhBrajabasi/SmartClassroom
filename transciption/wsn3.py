@@ -12,8 +12,8 @@ from six.moves import queue
 # Audio recording parameters
 RATE = 16000
 CHUNK = int(RATE / 10)  # 100ms
-
-
+    
+f = open("/var/www/html/transcripts/transcription.txt", "w+")
 class MicrophoneStream(object):
     """Opens a recording stream as a generator yielding the audio chunks."""
     def __init__(self, rate, chunk):
@@ -124,11 +124,14 @@ def listen_print_loop(responses):
 
         else:
             print(transcript + overwrite_chars)
+            f.write(transcript + overwrite_chars)
+            f.write("\n")
 
             # Exit recognition if any of the transcribed phrases could be
             # one of our keywords.
             if re.search(r'\b(exit|quit)\b', transcript, re.I):
                 print('Exiting..')
+                f.close()
                 break
 
             num_chars_printed = 0
