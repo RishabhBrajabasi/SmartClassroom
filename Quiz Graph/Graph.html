@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Chart using XML Data</title>
+<title>Quiz Report</title>
 <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <script type="text/javascript">
@@ -39,7 +39,7 @@
             return dataPoints;
         }
 	
-	$.get("http://localhost:8080/data.csv", function(data) {
+	$.get("http://cmusmartclass.wv.cc.cmu.edu/data.csv", function(data) {
 	    var chart = new CanvasJS.Chart("chartContainer", {
 		    title: {
 		         text: "Quiz Performance",
@@ -50,16 +50,19 @@
 		    axisX: {
       			 interval: 1
 		    },
+		    axisY: {  
+		    	interval: 1
+		    },
 		    data: [{
 		         type: "column",
-			 name: "Incorrect",
+			 name: "Correct",
 			 showInLegend: true,
 		         dataPoints: getDataPointsFromCSV(data)
 		      },
 	{
 		type: "column",
-		name: "Correct",
-		axisYType: "secondary",
+		name: "Incorrect",
+		// axisYType: "secondary",
 		showInLegend: true,
 		dataPoints: getDataPointsFromCSV_2(data)
 	}] 
