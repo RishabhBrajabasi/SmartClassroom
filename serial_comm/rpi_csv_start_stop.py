@@ -2,7 +2,8 @@
 import serial
 import csv
 import time
-port = "/dev/ttyACM2"
+import sys
+port = "/dev/ttyACM0"
 crct_ans = 0x4B
 start_bit = 0xFF
 index_flag = 0
@@ -45,7 +46,7 @@ with open('answers.csv') as csv_file:
     for row in csv_reader:
         ans_crct.append((int(row[0])))
     print ans_crct
-
+    	# print row[0]
 while True:
 	while flag == 1:
 		f = open(quiz_file, "r")
@@ -122,7 +123,9 @@ while True:
 				print ( "correct: " ,correct)
 				print ( "incorrect: ",i_correct)
 			if(index == len(ans_crct)):
-				print "***ALL Q DONE***"
+				print "***ALL QUESTION DONE***"
+				sys.exit()
+
 				#print index
 				
 			
