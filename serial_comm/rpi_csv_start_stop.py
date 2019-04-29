@@ -86,20 +86,21 @@ while True:
 			print( "\t answers   :  %i" % flags.answers    )
 
 			index_flag = index_flag + 1
-			if(index_flag == 2):
+			if(index_flag == 2): #recieved response from both the nodes
 				# Send Correct answer
 				s1.write('%d'%ans_crct[index])
 				s1.write('\0')
-				print("Answer Sent for question no",index)
+				print("Answer Sent for question no: ",index) #index is the question number
 				print ans_crct[index]
 				#s1.write('\0')
 
 				# Resetting start of quiz and other variables
-				f = open(quiz_file, "w")
+				f = open(quiz_file, "w") #redundant
 				f.write("0")
 				f.close()
 				index_flag = 0
 				index = index + 1
+				#correct and incorrect answer has the correct value. Write to data.csv
 				correct = 0
 				i_correct = 0
 				flag = 1
