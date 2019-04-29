@@ -16,8 +16,10 @@ d_1 = 0
 d_2 = 0
 d_3 = 0
 ans_crct = []
+write_csv = []
 path_file = '/home/pi/sketchbook/Seat_Map/file.txt'
 quiz_file = '/var/www/html/file.txt'
+quiz_site = '/var/www/html/data.csv'
 class Flags_bits( ctypes.LittleEndianStructure ):
     _fields_ = [
                 ("answers",     c_uint8, 4 ),  # asByte & 1
@@ -86,6 +88,19 @@ while True:
 			print( "\t answers   :  %i" % flags.answers    )
 
 			index_flag = index_flag + 1
+			if(index_flag <= 2):
+				print ("Comparing answer ")
+				#compare
+				# print ans_crct[index]
+				if(int(flags.answers) == int(send_ans.answers)):
+					# print "yes"
+					correct = correct + 1
+				else:
+					# print "NO"
+					i_correct = i_correct + 1
+				# index_flag = 0
+				print ( "correct: " ,correct)
+				print ( "incorrect: ",i_correct)
 			if(index_flag == 2): #recieved response from both the nodes
 				# Send Correct answer
 				s1.write('%d'%ans_crct[index])
@@ -101,6 +116,14 @@ while True:
 				index_flag = 0
 				index = index + 1
 				#correct and incorrect answer has the correct value. Write to data.csv
+				write_csv.append(str(index))
+				write_csv.append(str(correct))
+				write_csv.append(str(i_correct))
+				with open(quiz_site, 'a') as csvFile:
+						Writer = csv.writer(csvFile)
+						Writer.writerow(write_csv)
+				csvFile.close()
+				del write_csv[:]
 				correct = 0
 				i_correct = 0
 				flag = 1
@@ -110,19 +133,7 @@ while True:
 #				s1.write('%d'%start_bit)
 #				s1.write('\0')
 				
-			if(index_flag <= 2):
-				print ("Comparing answer ")
-				#compare
-				# print ans_crct[index]
-				if(int(flags.answers) == int(send_ans.answers)):
-					# print "yes"
-					correct = correct + 1
-				else:
-					# print "NO"
-					i_correct = i_correct + 1
-				# index_flag = 0
-				print ( "correct: " ,correct)
-				print ( "incorrect: ",i_correct)
+			
 			if(index == len(ans_crct)):
 				print "***ALL QUESTION DONE***"
 				sys.exit()
