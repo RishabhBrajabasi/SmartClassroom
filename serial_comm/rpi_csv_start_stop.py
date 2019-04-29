@@ -3,6 +3,7 @@ import serial
 import csv
 import time
 import sys
+import os
 port = "/dev/ttyACM0"
 crct_ans = 0x4B
 start_bit = 0xFF
@@ -41,7 +42,7 @@ s1 = serial.Serial(port, 9600)
 s1.flushInput()
 flag = 1;
 
-
+os.remove(quiz_site)
 #TODO: read csv file here
 with open('answers.csv') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=',')
@@ -119,7 +120,7 @@ while True:
 				write_csv.append(str(index))
 				write_csv.append(str(correct))
 				write_csv.append(str(i_correct))
-				with open(quiz_site, 'a') as csvFile:
+				with open(quiz_site, 'a+') as csvFile:
 						Writer = csv.writer(csvFile)
 						Writer.writerow(write_csv)
 				csvFile.close()
