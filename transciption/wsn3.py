@@ -2,7 +2,8 @@ from __future__ import division
 
 import re
 import sys
-
+from datetime import date
+import datetime
 from google.cloud import speech
 from google.cloud.speech import enums
 from google.cloud.speech import types
@@ -12,8 +13,10 @@ from six.moves import queue
 # Audio recording parameters
 RATE = 16000
 CHUNK = int(RATE / 10)  # 100ms
-    
-f = open("/var/www/html/transcripts/files/transcription.txt", "w+")
+var = datetime.datetime.now().strftime("%M")
+filename ="/var/www/html/transcripts/files/transcript"+var+".txt"
+
+f = open(filename, "w+")
 class MicrophoneStream(object):
     """Opens a recording stream as a generator yielding the audio chunks."""
     def __init__(self, rate, chunk):

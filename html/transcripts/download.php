@@ -1,7 +1,7 @@
 <?php
-  if ($handle = opendir('files')) {
+  if ($handle = opendir('.')) {
     while (false !== ($file = readdir($handle))) {
-      if ($file != "." && $file != "..") {
+      if ($file != "." && $file != ".." && $file != "download.php") {
         $thelist .= '<li><a href="'.$file.'" download>'.$file.'</a></li>';
       }
     }
