@@ -59,13 +59,13 @@
 			 showInLegend: true,
 		         dataPoints: getDataPointsFromCSV(data)
 		      },
-	{
-		type: "column",
-		name: "Incorrect",
-		// axisYType: "secondary",
-		showInLegend: true,
-		dataPoints: getDataPointsFromCSV_2(data)
-	}] 
+			{
+			 type: "column",
+	         	 name: "Incorrect",
+			// axisYType: "secondary",
+			showInLegend: true,
+			dataPoints: getDataPointsFromCSV_2(data)
+			}] 
 	     });
 		
 	      chart.render();
@@ -74,7 +74,115 @@
   }
 </script>
 </head>
+<div>
+	<a href="index_2.html">
+	<img src="/images/ece_logo.png" height="50" width="50">
+	</a>
+      <a href="temperature.html"><button>Classroom Conditions</button></a>
+      <a href="Attendance.html"><button>Attendance</button></a>
+      <a href="transcripts/download.php"><button>Transcripts</button></a>
+      <a href="Graph.html"><button>Quiz Results</button></a>
+      <a href="index_3.html"><button style="float:right"> Start Quiz</button></a>
+</div>
+<hr>
+
 <body>
-	<div id="chartContainer" style="width:100%; height:300px;"></div>
+
+	<div id="chartContainer" style="width:100%; height:300px;" align="center" ></div>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+<title>Quiz Report</title>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script type="text/javascript">
+    window.onload = function() {
+        var dataPoints = [];
+        var dataPoints_2 = [];
+	 
+        function getDataPointsFromCSV(csv) {
+            var dataPoints = csvLines = points = [];
+            csvLines = csv.split(/[\r?\n|\r|\n]+/); 
+		        
+            for (var i = 0; i < csvLines.length; i++)
+                if (csvLines[i].length > 0) {
+                    points = csvLines[i].split(",");
+                    dataPoints.push({ 
+                        x: parseFloat(points[0]),
+                        y: parseFloat(points[1]),
+                    });
+                }
+            return dataPoints;
+        }
+      
+      function getDataPointsFromCSV_2(csv) {
+            var dataPoints = csvLines = points = [];
+            csvLines = csv.split(/[\r?\n|\r|\n]+/); 
+		        
+            for (var i = 0; i < csvLines.length; i++)
+                if (csvLines[i].length > 0) {
+                    points = csvLines[i].split(",");
+                    dataPoints.push({ 
+                        x: parseFloat(points[0]),
+                        y: parseFloat(points[2]),
+                    });
+                }
+            return dataPoints;
+        }
+	
+	$.get("http://cmusmartclass.wv.cc.cmu.edu/data.csv", function(data) {
+	    var chart = new CanvasJS.Chart("chartContainer", {
+		    title: {
+		         text: "Quiz Performance",
+		    },
+		    zoomEnabled: true,
+		    width: 720,
+		    height: 600,
+		    axisX: {
+      			 interval: 1
+		    },
+		    axisY: {  
+		    	interval: 1
+		    },
+		    data: [{
+		         type: "column",
+			 name: "Correct",
+			 showInLegend: true,
+		         dataPoints: getDataPointsFromCSV(data)
+		      },
+			{
+			 type: "column",
+	         	 name: "Incorrect",
+			// axisYType: "secondary",
+			showInLegend: true,
+			dataPoints: getDataPointsFromCSV_2(data)
+			}] 
+	     });
+		
+	      chart.render();
+
+	});
+  }
+</script>
+</head>
+<div>
+	<a href="index_2.html">
+	<img src="/images/ece_logo.png" height="50" width="50">
+	</a>
+      <a href="temperature.html"><button>Classroom Conditions</button></a>
+      <a href="Attendance.html"><button>Attendance</button></a>
+      <a href="transcripts/download.php"><button>Transcripts</button></a>
+      <a href="Graph.html"><button>Quiz Results</button></a>
+      <a href="index_3.html"><button style="float:right"> Start Quiz</button></a>
+</div>
+<hr>
+
+<body>
+
+	<div id="chartContainer" style="width:100%; height:300px;" align="center" ></div>
+
 </body>
 </html>
