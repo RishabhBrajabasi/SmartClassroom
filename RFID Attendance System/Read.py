@@ -10,6 +10,7 @@ import threading
 timer_1 = 0
 timer_2 = 0
 timer_3 = 0
+random_timer = 0
 def reset_time_1 ():
 	global timer_1
 	timer_1 = 0
@@ -25,6 +26,9 @@ def reset_time_3 ():
 	timer_3 = 0
 	# print "Timer Reset_3"
 
+def reset_time_4 ():
+	global random_timer
+	random_timer = 0
 
 reader = SimpleMFRC522()
 c1 = 0
@@ -132,8 +136,12 @@ try:
 
 
 		else:
-			print "You are not registered for this class"
-			place_card = 0
+			if random_timer == 0:
+				print "You are not registered for this class"
+				random_timer = 1
+				timer_4r = threading.Timer(10.0, reset_time_4)
+				timer_4r.start()
+				place_card = 0
 			#print (id)
 		# print " "
 		time.sleep(2)

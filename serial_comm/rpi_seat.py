@@ -34,23 +34,23 @@ while True:
 		print "RAW: " + inputValue
 		flags.asByte = c_uint8(int(inputValue))
 		if(flags.type == 1):
-			flags.asByte = c_uint8(int(inputValue))
-			ans = '{0:04b}'.format(flags.answers)
-			ans_arr = [int(i) for i in ans] #for populating the csv
-			if ans_arr[0] == 1:
-			    print('A')
-			if ans_arr[1] == 1:
-			    print('B')
-			if ans_arr[2] == 1:
-			    print('C')
-			if ans_arr[3] == 1:
-			    print('D')
-			# print(ans[5])
-			print( "type: %i"      % flags.type     )
-			print( "deviceID:  %i" % flags.deviceID )
-			print( "answers   :  %i" % flags.answers    )
-			s1.write('%d'%crct_ans)
-			s1.write('\0')
+			# flags.asByte = c_uint8(int(inputValue))
+			# ans = '{0:04b}'.format(flags.answers)
+			# ans_arr = [int(i) for i in ans] #for populating the csv
+			# if ans_arr[0] == 1:
+			#     print('A')
+			# if ans_arr[1] == 1:
+			#     print('B')
+			# if ans_arr[2] == 1:
+			#     print('C')
+			# if ans_arr[3] == 1:
+			#     print('D')
+			# # print(ans[5])
+			# print( "type: %i"      % flags.type     )
+			# print( "deviceID:  %i" % flags.deviceID )
+			# print( "answers   :  %i" % flags.answers    )
+			# s1.write('%d'%crct_ans)
+			# s1.write('\0')
 		else:
 			print( "deviceID:  %i" % flags.deviceID )
 			print( "occupancy   :  %i" % flags.answers)

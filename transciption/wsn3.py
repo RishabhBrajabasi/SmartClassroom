@@ -14,8 +14,7 @@ from six.moves import queue
 RATE = 16000
 CHUNK = int(RATE / 10)  # 100ms
 var = datetime.datetime.now().strftime("%M")
-filename ="/var/www/html/transcripts/files/transcript"+var+".txt"
-
+filename ="/var/www/html/transcripts/transcript"+var+".txt"
 f = open(filename, "w+")
 class MicrophoneStream(object):
     """Opens a recording stream as a generator yielding the audio chunks."""
