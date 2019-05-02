@@ -40,7 +40,7 @@ flags = Flags()
 
 s1 = serial.Serial(port, 9600)
 s1.flushInput()
-flag = 1;
+flag = 0;
 
 os.remove(quiz_site)
 #TODO: read csv file here
@@ -51,15 +51,15 @@ with open('answers.csv') as csv_file:
     print ans_crct
     	# print row[0]
 while True:
-	while flag == 1:
-		f = open(quiz_file, "r")
-		if str(f.read(1)) == "1":
-			print "START QUIZ"
-			flag = 0
-			s1.write('%d'%start_bit)
-			s1.write('\0')
-		#print (int(f.read()))
-		f.close()
+	# while flag == 1:
+	f = open(quiz_file, "r")
+	if str(f.read(1)) == "1":
+		print "START QUIZ"
+		flag = 1
+		s1.write('%d'%start_bit)
+		s1.write('\0')
+	#print (int(f.read()))
+	f.close()
 
 	if s1.inWaiting()>0:
 		inputValue = s1.readline() # need to change this to 3 or figure out a way to solve this
@@ -68,7 +68,12 @@ while True:
 		flags.asByte = c_uint8(int(inputValue))
 
 		# ANSWER
-		if(flags.type == 1):
+		if(flag == 1):
+			s1.write('%d'%start_bit)
+			s1.write('\0')
+		if(int(inputValue) == 255):
+			flag = 0
+		elif(flags.type == 1):
 			print("Rx Answer")
 			flags.asByte = c_uint8(int(inputValue))
 			send_ans = Flags()
@@ -127,7 +132,7 @@ while True:
 				del write_csv[:]
 				correct = 0
 				i_correct = 0
-				flag = 1
+				flag = 0
 				# Sending start of quiz again
 #				time.sleep(5)
 #				print("Sending start of quiz again")
@@ -142,24 +147,24 @@ while True:
 				#print index
 				
 			
-		#else:
-		#	print( "deviceID:  %i" % flags.deviceID )
-		#	print( "occupancy   :  %i" % flags.answers)
-		#	if flags.answers == 1:
-		#		if flags.deviceID == 1:
-		#			d_1 = 1
-		#		else:
-		#			d_2 = 1
-		#		print "occupied"
-		#	else:
-		#		if flags.deviceID == 1:
-		#			d_1 = 0
-		#		else:
-		#			d_2 = 0
-		#		print "Not occupied"
-		#	
+		else:
+			print( "deviceID:  %i" % flags.deviceID )
+			print( "occupancy   :  %i" % flags.answers)
+			if flags.answers == 1:
+				if flags.deviceID == 1:
+					d_1 = 1
+				else:
+					d_2 = 1
+				print "occupied"
+			else:
+				if flags.deviceID == 1:
+					d_1 = 0
+				else:
+					d_2 = 0
+				print "Not occupied"
+			
                 
-		#	f = open(path_file, "w")
+			f = open(path_file, "w")
 
-		#	f.write(str(d_1) + '\n' + str(d_2) + '\n') #removed
-		#	f.close()
+			f.write(str(d_1) + '\n' + str(d_2) + '\n') #removed
+			f.close()
